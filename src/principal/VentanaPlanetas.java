@@ -4,6 +4,7 @@ import javax.swing.*;
 import dao.PlanetaDAO;
 import dao.impl.PlanetaDAOImpl;
 import modelo.Planeta;
+import java.awt.*;
 import java.util.List;
 
 public class VentanaPlanetas extends JFrame {
@@ -23,13 +24,72 @@ public class VentanaPlanetas extends JFrame {
     private JTextArea textArea1;
 
     public VentanaPlanetas() {
+        inicializarComponentes();
+        configurarEventos();
+    }
+
+    private void inicializarComponentes() {
         setTitle("Gestion de Planetas");
-        setSize(700, 550);
+        setSize(850, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(false);
+
+        panel1 = new JPanel(new BorderLayout(10, 10));
+        panel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        panelIzquierdo = new JPanel(new GridLayout(8, 2, 5, 8));
+        panelIzquierdo.setBorder(BorderFactory.createTitledBorder("Datos del Planeta"));
+        panelIzquierdo.setPreferredSize(new Dimension(480, 0));
+
+        panelIzquierdo.add(new JLabel("ID:"));
+        txtidTextField = new JTextField();
+        panelIzquierdo.add(txtidTextField);
+
+        panelIzquierdo.add(new JLabel("Nombre:"));
+        txtNombreTextField = new JTextField();
+        panelIzquierdo.add(txtNombreTextField);
+
+        panelIzquierdo.add(new JLabel("Galaxia:"));
+        txtGalaxiaTextField = new JTextField();
+        panelIzquierdo.add(txtGalaxiaTextField);
+
+        panelIzquierdo.add(new JLabel("Tipo Planeta:"));
+        txtTipoTextField = new JTextField();
+        panelIzquierdo.add(txtTipoTextField);
+
+        panel1.add(panelIzquierdo, BorderLayout.WEST);
+
+        panelDerecho = new JPanel(new GridLayout(5, 1, 10, 12));
+        panelDerecho.setBorder(BorderFactory.createEmptyBorder(15, 10, 15, 10));
+        panelDerecho.setPreferredSize(new Dimension(220, 0));
+
+        btnBuscarPorId = new JButton("Buscar por ID");
+        btnVerTodos = new JButton("Ver Todos");
+        btnAgregar = new JButton("Agregar Nuevo");
+        btnFiltrarGalaxia = new JButton("Filtrar por Galaxia");
+        BtnFiltrarVida = new JButton("Filtrar por Vida");
+
+        panelDerecho.add(btnBuscarPorId);
+        panelDerecho.add(btnVerTodos);
+        panelDerecho.add(btnAgregar);
+        panelDerecho.add(btnFiltrarGalaxia);
+        panelDerecho.add(BtnFiltrarVida);
+
+        panel1.add(panelDerecho, BorderLayout.EAST);
+
+        panelInferior = new JPanel(new BorderLayout());
+        panelInferior.setBorder(BorderFactory.createTitledBorder("Resultados"));
+
+        textArea1 = new JTextArea();
+        textArea1.setEditable(false);
+        textArea1.setFont(new Font("Monospaced", Font.PLAIN, 13));
+        JScrollPane scrollPane = new JScrollPane(textArea1);
+        scrollPane.setPreferredSize(new Dimension(0, 110));
+        panelInferior.add(scrollPane, BorderLayout.CENTER);
+
+        panel1.add(panelInferior, BorderLayout.SOUTH);
+
         setContentPane(panel1);
-        configurarEventos();
     }
 
     private void configurarEventos() {
@@ -44,9 +104,11 @@ public class VentanaPlanetas extends JFrame {
                     textArea1.append("ID: " + encontrado.getId() + "\n");
                     textArea1.append("Nombre: " + encontrado.getNombre() + "\n");
                     textArea1.append("Galaxia: " + encontrado.getGalaxia() + "\n");
-                    textArea1.append("Tipo: " + encontrado.getTipo() + "\n");
-                    textArea1.append("Satelites: " + encontrado.getNumeroSatelites() + "\n");
-                    textArea1.append("Tiene anillos: " + (encontrado.isTieneAnillos() ? "Si" : "No") + "\n");
+                    textArea1.append("Tipo: " + encontrado.getTipoPlaneta() + "\n");
+                    textArea1.append("Descubierto: " + encontrado.getFechaDeDescubierto() + "\n");
+                    textArea1.append("Satelites: " + encontrado.getNumeroDeSatelitesNaturales() + "\n");
+                    textArea1.append("Anillos: " + (encontrado.isSistemaDeAnillos() ? "Si" : "No") + "\n");
+                    textArea1.append("Posible Vida: " + (encontrado.isPodriaContenerVida() ? "Si" : "No") + "\n");
                 } else {
                     textArea1.setText("No existe ningun planeta con ese ID.");
                 }
@@ -78,7 +140,7 @@ public class VentanaPlanetas extends JFrame {
                 Planeta nuevo = new Planeta();
                 nuevo.setNombre(nombre);
                 nuevo.setGalaxia(galaxia);
-                nuevo.setTipo(tipo);
+                nuevo.setTipoPlaneta(tipo);
 
                 PlanetaDAO dao = new PlanetaDAOImpl();
                 if (dao.agregar(nuevo)) {
@@ -111,17 +173,25 @@ public class VentanaPlanetas extends JFrame {
         });
 
         BtnFiltrarVida.addActionListener(e -> {
-            String respuesta = JOptionPane.showInputDialog("Con posible vida? (true / false):");
+            Object[] opciones = {"Si", "No"};
+            int seleccion = JOptionPane.showOptionDialog(null,
+                    "Selecciona si tiene posible vida:",
+                    "Filtrar por Vida",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    opciones,
+                    opciones[0]);
 
-            if (respuesta != null && !respuesta.isEmpty()) {
-                boolean buscarVida = Boolean.parseBoolean(respuesta);
+            if (seleccion != -1) {
+                boolean buscarVida = (seleccion == 0);
                 PlanetaDAO dao = new PlanetaDAOImpl();
                 List<Planeta> lista = dao.filtrarPorPosibleVida(buscarVida);
 
                 if (lista.isEmpty()) {
                     textArea1.setText("No hay planetas con esa caracteristica.");
                 } else {
-                    textArea1.setText("PLANETAS (Posible vida = " + buscarVida + "):\n");
+                    textArea1.setText("PLANETAS (Posible vida = " + (buscarVida ? "Si" : "No") + "):\n");
                     for (Planeta p : lista) {
                         textArea1.append("- " + p.getNombre() + " | " + p.getGalaxia() + "\n");
                     }
