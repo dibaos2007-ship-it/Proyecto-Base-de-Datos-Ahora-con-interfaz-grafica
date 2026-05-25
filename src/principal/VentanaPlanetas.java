@@ -6,7 +6,7 @@ import dao.impl.PlanetaDAOImpl;
 import modelo.Planeta;
 import java.util.List;
 
-public class VentanaPlanetas {
+public class VentanaPlanetas extends JFrame {
     private JPanel panel1;
     private JPanel panelIzquierdo;
     private JTextField txtidTextField;
@@ -23,8 +23,15 @@ public class VentanaPlanetas {
     private JTextArea textArea1;
 
     public VentanaPlanetas() {
+        setTitle("Gestion de Planetas");
+        setSize(700, 550);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setContentPane(panel1);
         configurarEventos();
     }
+
     private void configurarEventos() {
         btnBuscarPorId.addActionListener(e -> {
             try {
@@ -32,25 +39,21 @@ public class VentanaPlanetas {
                 PlanetaDAO dao = new PlanetaDAOImpl();
                 Planeta encontrado = dao.consultarPorId(id);
 
-
-
                 if (encontrado != null) {
                     textArea1.setText("PLANETA ENCONTRADO:\n");
                     textArea1.append("ID: " + encontrado.getId() + "\n");
                     textArea1.append("Nombre: " + encontrado.getNombre() + "\n");
                     textArea1.append("Galaxia: " + encontrado.getGalaxia() + "\n");
                     textArea1.append("Tipo: " + encontrado.getTipo() + "\n");
-                    textArea1.append("Satélites: " + encontrado.getNumeroSatelites() + "\n");
+                    textArea1.append("Satelites: " + encontrado.getNumeroSatelites() + "\n");
                     textArea1.append("Tiene anillos: " + (encontrado.isTieneAnillos() ? "Si" : "No") + "\n");
                 } else {
                     textArea1.setText("No existe ningun planeta con ese ID.");
                 }
-
             } catch (NumberFormatException ex) {
                 textArea1.setText("Error: Escribe solo numeros en el ID.");
             }
         });
-
 
         btnVerTodos.addActionListener(e -> {
             PlanetaDAO dao = new PlanetaDAOImpl();
@@ -65,7 +68,6 @@ public class VentanaPlanetas {
                 }
             }
         });
-
 
         btnAgregar.addActionListener(e -> {
             try {
@@ -85,12 +87,10 @@ public class VentanaPlanetas {
                 } else {
                     textArea1.setText("Error: No se pudo guardar el planeta.");
                 }
-
             } catch (Exception ex) {
                 textArea1.setText("Error: Revisa que los datos esten bien escritos.");
             }
         });
-
 
         btnFiltrarGalaxia.addActionListener(e -> {
             String galaxiaBuscada = JOptionPane.showInputDialog("Escribe el nombre de la galaxia:");
@@ -109,6 +109,7 @@ public class VentanaPlanetas {
                 }
             }
         });
+
         BtnFiltrarVida.addActionListener(e -> {
             String respuesta = JOptionPane.showInputDialog("Con posible vida? (true / false):");
 
@@ -128,24 +129,11 @@ public class VentanaPlanetas {
             }
         });
     }
+
     private void limpiarCampos() {
         txtidTextField.setText("");
         txtNombreTextField.setText("");
         txtGalaxiaTextField.setText("");
         txtTipoTextField.setText("");
-    }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Gestion de Planetas");
-            VentanaPlanetas ventana = new VentanaPlanetas();
-            frame.setContentPane(ventana.panel1);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
-    }
-
-    public void setVisible(boolean b) {
     }
 }
