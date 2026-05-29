@@ -1,14 +1,13 @@
-# LO QUE SÍ SE SUBIRÁ: PERMITE TODO, MENOS LO QUE EXPLICO ABAJO
-# (El * significa ignorar todo, pero con ! le decimos qué SÍ queremos)
+# Ignorar todo por defecto
 *
 
-# 🟢 LO QUE SÍ SE SUBE: TU CÓDIGO Y ARCHIVOS
+# PERO SÍ INCLUIR ESTOS ARCHIVOS Y CARPETAS
 !src/
 !src/*/
 !README.md
 !.gitignore
 
-# 🔴 LO QUE NO SE SUBE: BASURA Y CONFIGURACIÓN DEL PROGRAMA
+# LO QUE SÍ QUEREMOS IGNORAR (basura)
 .idea/
 *.iml
 *.ipr
