@@ -6,6 +6,6 @@ public class ConfigBD {
     public static final String USUARIO = "neondb_owner";
     public static final String CONTRASEÑA = "npg_ygEpOdj56UMl";
 
-//rhtrjhtyvf
+//rhtrjhtyvffg
     private ConfigBD() {}
 }

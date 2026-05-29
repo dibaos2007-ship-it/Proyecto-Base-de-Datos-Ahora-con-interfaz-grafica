@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Planeta {
-    // Atributos sgerhtrjyfvf
+    // Atributos sgerhtrjyfvffrgf
     private String nombre;
     private int id;
     private LocalDate fechaDescubierto;

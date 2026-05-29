@@ -178,7 +178,7 @@ public class Main {
         }
     }
 
-    // Filtrar planetas
+    // Filtrar planetasfvfd
     private static void filtrarPlanetas() {
         System.out.println("\nFILTRAR PLANETAS");
         System.out.println("Criterios: tipo | galaxia | vida | anillos | satelites | temperatura | distancia");

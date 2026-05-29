@@ -31,7 +31,7 @@ public class PlanetaDAOImpl implements PlanetaDAO {
                 planeta.setNombre(resultado.getString("NOMBRE"));
                 planeta.setId(resultado.getInt("id"));
 
-                // Convertimos DATE de la BD a LocalDate de Java
+                // Convertimos DATE de la BD a LocalDate de vffvfd
                 Date fechaDesc = resultado.getDate("FECHA DE DESCUBIERTO");
                 if (fechaDesc != null) {
                     planeta.setFechaDescubierto(fechaDesc.toLocalDate());
