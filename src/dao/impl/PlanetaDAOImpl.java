@@ -209,7 +209,7 @@ public class PlanetaDAOImpl implements PlanetaDAO {
 
                 resultado.add(p);
             }
-
+//necesito que el src se vea en git hub
         } catch (SQLException | NumberFormatException e) {
             System.out.println(" Error al filtrar " + e.getMessage());
         }
