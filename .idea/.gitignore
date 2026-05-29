@@ -1,9 +1,14 @@
-# --------------------------
-# LO QUE SÍ SE SUBIRÁ (TODO LO IMPORTANTE)
-# --------------------------
-# Subimos todo lo que esté en el proyecto, menos lo que está abajo
+# LO QUE SÍ SE SUBIRÁ: PERMITE TODO, MENOS LO QUE EXPLICO ABAJO
+# (El * significa ignorar todo, pero con ! le decimos qué SÍ queremos)
 *
-# PERO NO SUBIMOS ESTAS COSAS QUE NO SIRVEN PARA NADA:
+
+# 🟢 LO QUE SÍ SE SUBE: TU CÓDIGO Y ARCHIVOS
+!src/
+!src/*/
+!README.md
+!.gitignore
+
+# 🔴 LO QUE NO SE SUBE: BASURA Y CONFIGURACIÓN DEL PROGRAMA
 .idea/
 *.iml
 *.ipr
