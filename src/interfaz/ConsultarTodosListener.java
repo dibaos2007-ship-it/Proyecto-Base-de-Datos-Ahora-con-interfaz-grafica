@@ -10,7 +10,7 @@ public class ConsultarTodosListener implements ActionListener {
     public ConsultarTodosListener(InterPlanetas ventana) {
         this.ventana = ventana;
     }
-
+//KJBJ
     @Override
     public void actionPerformed(ActionEvent e) {
         try {

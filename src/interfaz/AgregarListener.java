@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 
 public class AgregarListener implements ActionListener {
     public final InterPlanetas ventana;
-
+//NBM
     public AgregarListener(InterPlanetas ventana) {
         this.ventana = ventana;
     }
@@ -17,7 +17,7 @@ public class AgregarListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            //  PRIMERO VERIFICAMOS QUE NINGÚN CAMPO ESTÉ VACÍO
+
             if (ventana.id.getText().isBlank() ||
                     ventana.nombre.getText().isBlank() ||
                     ventana.fechaDescubierto.getText().isBlank() ||

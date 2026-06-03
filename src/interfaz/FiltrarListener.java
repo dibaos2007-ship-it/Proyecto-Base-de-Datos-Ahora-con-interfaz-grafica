@@ -41,4 +41,4 @@ public class FiltrarListener implements ActionListener {
             ventana.resultados.setText("ERROR: " + ex.getMessage());
         }
     }
-}
+}//KJBHKJb

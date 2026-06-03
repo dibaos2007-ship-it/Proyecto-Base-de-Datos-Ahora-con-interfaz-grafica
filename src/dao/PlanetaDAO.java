@@ -2,7 +2,7 @@ package dao;
 
 import modelo.Planeta;
 import java.util.List;
-//grhtrhfvfvvf
+//grhtrhfvfvvfjn
 public interface PlanetaDAO {
     Planeta consultarPorNombre(String nombrePlaneta);
     List<Planeta> consultarTodos();

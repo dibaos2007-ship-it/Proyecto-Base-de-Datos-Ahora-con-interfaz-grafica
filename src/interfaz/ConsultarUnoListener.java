@@ -56,4 +56,4 @@ public class ConsultarUnoListener implements ActionListener {
             ventana.resultados.setText("ERROR: " + ex.getMessage());
         }
     }
-}
+}//mnljkn

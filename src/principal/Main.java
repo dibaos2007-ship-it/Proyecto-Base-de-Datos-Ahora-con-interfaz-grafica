@@ -6,4 +6,4 @@ public class Main {
         InterPlanetas.abrirVentana();
 
     }
-}
+}//JBKJB
