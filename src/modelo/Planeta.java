@@ -18,10 +18,10 @@ public class Planeta {
     private double aniosLuzTierra;
     private LocalDateTime registro;
 
-    // Constructor vacío
+    // Constructor
     public Planeta() {}
 
-    // Constructor con todos los campos (sin registro, ya que se genera automáticamente)
+    // Constructor con todos los campos
     public Planeta(String nombre, int id, LocalDate fechaDescubierto, String tipoPlaneta,
                    int numeroSatelites, boolean sistemaDeAnillos, String galaxia,
                    boolean podriaContenerVida, int temperaturaMedia, double periodoOrbital,
